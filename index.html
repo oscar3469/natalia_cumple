@@ -6,6 +6,33 @@
     <title>natalia</title>
     <link rel="shortcut icon" href="logoNa.png" type="image/x-icon">
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f3f3f3;
+            z-index: 1000;
+        }
+
+        .content {
+            overflow-y: auto;
+            height: 100vh;
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 5s ease; /* Transición para aparecer suavemente */
+        }
+
+        .content.visible {
+            opacity: 1; /* Al hacer visible, se mostrará suavemente */
+        }
+
         header {
             background: linear-gradient(to right, #d66161, #c964c4);
             text-align: center;
@@ -13,7 +40,7 @@
             font-size: 24px;
             font-weight: bold;
         }
-        
+
         p {
             margin-top: 20px;
             font-size: 30px;
@@ -28,6 +55,11 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            transition: transform 0.5s ease; /* Para el efecto de zoom */
+        }
+
+        .card-object:hover img {
+            transform: scale(1.2); /* Aumenta el tamaño de la imagen al pasar el cursor */
         }
 
         .card-object {
@@ -78,7 +110,8 @@
             text-align: center;
             padding: 0 20px;
         }
-        .boton{
+
+        .boton {
             background-color: #008CBA;
             color: white;
             padding: 20px 20px;
@@ -86,121 +119,126 @@
             cursor: pointer;
             border-radius: 10px;
             font-size: 16px;
-            display: block; margin: 20px auto;
+            display: block;
+            margin: 20px auto;
         }
-        .boton:hover{
+
+        .boton:hover {
             background-color: #4CAF50;
         }
-        .boton:active{
-        background-color: #f44336;
-        transform: translateY(2px);
+
+        .boton:active {
+            background-color: #f44336;
+            transform: translateY(2px);
         }
-        .fecha{
+
+        .fecha {
             text-align: center;
             margin-top: 20px;
             font-size: 20px;
-            
-            
         }
-        .titulo{
+
+        .titulo {
             font-weight: bold;
             background-color: #c964c4;
         }
-        
-        
     </style>
 </head>
 <body>
-<header>
-    <p>
-        feliz cumpleaños 🎂 
-    </p>
+    <div id="preloader"></div>
+    <div class="content" id="content">
+        <header>
+            <p>
+                feliz cumpleaños 🎂 
+            </p>
 
-    <p class="blinking-message">
-        Stefani Natalia Maldonado Salgado
-    </p>
-</header>
-<div class="card-object">
-    <img src="img1.png" alt="imagen de ella">
-</div>
-<div class="fecha">
-    <p class="titulo">
-        años cumplidos 
-    </p>
-    <p class="edad">
-        16
-    </p>
-</div>
-<button id="start-speech" class="boton">Escuchar Poema</button>
-<div class="confetti-container" id="confetti-container"></div>
-<div class="poem">
-    <p>En este día tan hermoso,<br> donde el sol brilla con más fulgor,<br> celebramos tu vida, Natalia,<br> llena de amor y esplendor.</p>
+            <p class="blinking-message">
+                Stefani Natalia Maldonado Salgado
+            </p>
+        </header>
+        <div class="card-object">
+            <img src="img1.png" alt="imagen de ella">
+        </div>
+        <div class="fecha">
+            <p class="titulo">
+                años cumplidos 
+            </p>
+            <p class="edad">
+                16
+            </p>
+        </div>
+        <button id="start-speech" class="boton">Escuchar Poema</button>
+        <div class="confetti-container" id="confetti-container"></div>
+        <div class="poem">
+            <p>En este día tan hermoso,<br> donde el sol brilla con más fulgor,<br> celebramos tu vida, Natalia,<br> llena de amor y esplendor.</p>
 
-    <p>Cada momento junto a ti es un tesoro,<br> cada sonrisa, un destello de luz,<br> tu bondad y alegría nos inspiran,<br> eres única, un ser de gran virtud.</p>
+            <p>Cada momento junto a ti es un tesoro,<br> cada sonrisa, un destello de luz,<br> tu bondad y alegría nos inspiran,<br> eres única, un ser de gran virtud.</p>
 
-    <p>Las estrellas en el cielo cantan,<br> un coro celestial en tu honor,<br> porque hoy cumples un año más,<br> un año lleno de amor.</p>
+            <p>Las estrellas en el cielo cantan,<br> un coro celestial en tu honor,<br> porque hoy cumples un año más,<br> un año lleno de amor.</p>
 
-    <p>Que la felicidad te abrace siempre,<br> que tus sueños se hagan realidad,<br> que cada día esté lleno de magia,<br> y que nunca falte la amistad.</p>
+            <p>Que la felicidad te abrace siempre,<br> que tus sueños se hagan realidad,<br> que cada día esté lleno de magia,<br> y que nunca falte la amistad.</p>
 
-    <p>Feliz cumpleaños, Natalia,<br> hoy celebramos junto a ti,<br> agradecidos por tu existencia,<br> por el regalo de tenerte aquí.</p>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Crear serpentinas
-        const confettiContainer = document.getElementById('confetti-container');
-        for (let i = 0; i < 100; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = `${Math.random() * 100}vw`;
-            confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            confettiContainer.appendChild(confetti);
-        }
-
-        // Añadir efecto de animación con fade-in para los elementos que se cargan en el DOM
-        const elements = document.querySelectorAll('.fade');
-        elements.forEach((element, index) => {
-            setTimeout(() => {
-                element.classList.add('fade-in');
-            }, index * 300); // Retardo de 300ms entre elementos
-        });
-
-        const poemText = `En este día tan hermoso, donde el sol brilla con más fulgor, celebramos tu vida, Natalia, llena de amor y esplendor. Cada momento junto a ti es un tesoro, cada sonrisa, un destello de luz, tu bondad y alegría nos inspiran, eres única, un ser de gran virtud. Las estrellas en el cielo cantan, un coro celestial en tu honor, porque hoy cumples un año más, un año lleno de amor. Que la felicidad te abrace siempre, que tus sueños se hagan realidad, que cada día esté lleno de magia, y que nunca falte la amistad. Feliz cumpleaños, Natalia, hoy celebramos junto a ti, agradecidos por tu existencia, por el regalo de tenerte aquí. Atentamente, el ingeniero viejito Oscar francisco .`;
-
-        const utterance = new SpeechSynthesisUtterance(poemText);
-        utterance.lang = 'es-ES';
-
-        const startButton = document.getElementById('start-speech');
-
-        const speakText = () => {
-            const voices = window.speechSynthesis.getVoices();
-            let selectedVoice = voices.find(voice => voice.name.includes('Luciana') || voice.lang === 'es-ES');
-            if (!selectedVoice) {
-                selectedVoice = voices.find(voice => voice.lang === 'es-ES') || voices[0]; // Si no se encuentra la voz deseada, usar la primera disponible en español o la primera disponible
+            <p>Feliz cumpleaños, Natalia,<br> hoy celebramos junto a ti,<br> agradecidos por tu existencia,<br> por el regalo de tenerte aquí.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Crear serpentinas
+            const confettiContainer = document.getElementById('confetti-container');
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confettiContainer.appendChild(confetti);
             }
 
-            utterance.voice = selectedVoice;
-            speechSynthesis.speak(utterance);
-        };
+            const poemText = `En este día tan hermoso, donde el sol brilla con más fulgor, celebramos tu vida, Natalia, llena de amor y esplendor. Cada momento junto a ti es un tesoro, cada sonrisa, un destello de luz, tu bondad y alegría nos inspiran, eres única, un ser de gran virtud. Las estrellas en el cielo cantan, un coro celestial en tu honor, porque hoy cumples un año más, un año lleno de amor. Que la felicidad te abrace siempre, que tus sueños se hagan realidad, que cada día esté lleno de magia, y que nunca falte la amistad. Feliz cumpleaños, Natalia, hoy celebramos junto a ti, agradecidos por tu existencia, por el regalo de tenerte aquí. Atentamente, el ingeniero viejito Oscar francisco .`;
 
-        startButton.addEventListener('click', () => {
-            // Esperar a que las voces se carguen completamente
-            const waitForVoices = new Promise(resolve => {
-                let voices = window.speechSynthesis.getVoices();
-                if (voices.length !== 0) {
-                    resolve(voices);
-                } else {
-                    window.speechSynthesis.onvoiceschanged = () => {
-                        voices = window.speechSynthesis.getVoices();
-                        resolve(voices);
-                    };
+            const utterance = new SpeechSynthesisUtterance(poemText);
+            utterance.lang = 'es-ES';
+
+            const startButton = document.getElementById('start-speech');
+
+            const speakText = () => {
+                const voices = window.speechSynthesis.getVoices();
+                let selectedVoice = voices.find(voice => voice.name.includes('Luciana') || voice.lang === 'es-ES');
+                if (!selectedVoice) {
+                    selectedVoice = voices.find(voice => voice.lang === 'es-ES') || voices[0]; // Si no se encuentra la voz deseada, usar la primera disponible en español o la primera disponible
                 }
+
+                utterance.voice = selectedVoice;
+                speechSynthesis.speak(utterance);
+            };
+
+            startButton.addEventListener('click', () => {
+                // Esperar a que las voces se carguen completamente
+                const waitForVoices = new Promise(resolve => {
+                    let voices = window.speechSynthesis.getVoices();
+                    if (voices.length !== 0) {
+                        resolve(voices);
+                    } else {
+                        window.speechSynthesis.onvoiceschanged = () => {
+                            voices = window.speechSynthesis.getVoices();
+                            resolve(voices);
+                        };
+                    }
+                });
+
+                waitForVoices.then(() => {
+                    speakText();
+                });
             });
 
-            waitForVoices.then(() => {
-                speakText();
-            });
+            // Mostrar el contenido con una animación de aparición
+            const preloader = document.getElementById('preloader');
+            const content = document.getElementById('content');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                content.classList.add('visible'); // Hacer el contenido visible con la animación de aparición
+                document.body.style.overflow = 'auto';
+            }, 100); // Breve retraso para asegurarse de que la animación se vea
         });
-    });
-</script>
+    </script>
 </body>
 </html>
